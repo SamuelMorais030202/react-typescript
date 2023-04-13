@@ -1,6 +1,4 @@
 # react-typescript
 
-Esse é um repositório que contem conteúdos relacionados aos meus estudos de React com Typescript.
-
-Os conteúdos desse repositório vão estar divididos em branchs.
+# Esse é meu primeiro dia usando react com um templete typescript
 
