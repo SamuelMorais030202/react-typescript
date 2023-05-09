@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import Timer from "../components/Time";
 
 export const Login = () => {
@@ -7,6 +7,8 @@ export const Login = () => {
     password: '',
   });
 
+  const refInput = useRef<HTMLInputElement>(null);
+
   const handleChangeInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({
       ...user,
@@ -14,17 +16,20 @@ export const Login = () => {
     })
   }
 
-  useEffect(() => {
-    if (window.confirm('Você é homem ?')) {
-      console.log('Homem')
-    } else {
-      console.log('Mulher');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.confirm('Você é homem ?')) {
+  //     console.log('Homem');
+  //   } else {
+  //     console.log('Mulher');
+  //   }
+  // }, []);
 
-  const handleLogin = () => {
+  const handleLogin = useCallback(() => {
     console.log(user.email, user.password);
-  }
+    // if (refInput !== null) {
+    //   refInput.current?.focus()
+    // }
+  }, [user.email, user.password]);
 
   return (
     <div>
@@ -39,12 +44,14 @@ export const Login = () => {
             placeholder="E-mail"
             value={ user.email }
             onChange={ handleChangeInputs }
+            onKeyDown={ e => e.key === 'Enter' ? refInput.current?.focus() : null}
           />
         </label>
         <label>
           <input
             type="password"
             name="password"
+            ref={refInput}
             id="password"
             value={ user.password }
             onChange={ handleChangeInputs }
