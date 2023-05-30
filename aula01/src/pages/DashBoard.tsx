@@ -18,5 +18,5 @@ export const DashBoard = () => {
       <button type="button" onClick={ () => counterRef.current.counter++ } >Somar</button>
       <button onClick={ handleClick }>Redirecionanmento</button>
     </div>
-  )
+  );
 }

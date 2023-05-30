@@ -1,10 +1,12 @@
 import { Routes } from './routes/index';
-
+import { UsuarioLogadoProvider } from './shared/contexts';
 
 function App() {
   return (
     <div className="App">
-      <Routes />
+      <UsuarioLogadoProvider>
+        <Routes />
+      </UsuarioLogadoProvider>
     </div>
   );
 }

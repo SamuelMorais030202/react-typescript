@@ -2,14 +2,20 @@ import { useCallback, useRef, useState } from "react"
 import { Button } from "../components/Button";
 import { InputLogin } from "../components/InputLogin";
 import Timer from "../components/Time";
+// import { UsuarioLogadoContext } from "../shared/contexts";
+import { useLoginContext } from "../shared/hooks";
 
 export const Login = () => {
+  const { values, nomeDoUsuario } = useLoginContext();
+
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
 
   const refInput = useRef<HTMLInputElement>(null);
+
+  // const userLog = useContext(UsuarioLogadoContext);
 
   const handleChangeInputs = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({
@@ -25,6 +31,7 @@ export const Login = () => {
   return (
     <div>
       <h1 ref={refInput}>Login Page</h1>
+      <p>Usuario logado: { nomeDoUsuario }</p>
       <Timer />
       <InputLogin
         label="Email"
@@ -42,10 +49,9 @@ export const Login = () => {
         onChange={ handleChangeInputs }
         value={ user.password }
       />
+      <p>{ values.name }</p>
+      <button type="button" onClick={ values.testContext }>Test</button>
       <Button handleLogin={ handleLogin } type="button">Login</Button>
-      {/* <label>
-        <button type="button" onClick={ handleLogin }>Login</button>
-      </label> */}
     </div>
   )
 }
