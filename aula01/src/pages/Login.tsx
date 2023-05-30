@@ -1,4 +1,6 @@
 import { useCallback, useRef, useState } from "react"
+import { Button } from "../components/Button";
+import { InputLogin } from "../components/InputLogin";
 import Timer from "../components/Time";
 
 export const Login = () => {
@@ -16,51 +18,34 @@ export const Login = () => {
     })
   }
 
-  // useEffect(() => {
-  //   if (window.confirm('Você é homem ?')) {
-  //     console.log('Homem');
-  //   } else {
-  //     console.log('Mulher');
-  //   }
-  // }, []);
-
   const handleLogin = useCallback(() => {
     console.log(user.email, user.password);
-    // if (refInput !== null) {
-    //   refInput.current?.focus()
-    // }
   }, [user.email, user.password]);
 
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1 ref={refInput}>Login Page</h1>
       <Timer />
-      <form>
-        <label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="E-mail"
-            value={ user.email }
-            onChange={ handleChangeInputs }
-            onKeyDown={ e => e.key === 'Enter' ? refInput.current?.focus() : null}
-          />
-        </label>
-        <label>
-          <input
-            type="password"
-            name="password"
-            ref={refInput}
-            id="password"
-            value={ user.password }
-            onChange={ handleChangeInputs }
-          />
-        </label>
-        <label>
-          <button type="button" onClick={ handleLogin }>Login</button>
-        </label>
-      </form>
+      <InputLogin
+        label="Email"
+        name="email"
+        type="email"
+        onChange={ handleChangeInputs }
+        value={ user.email }
+        onPressEnter={() => refInput.current?.focus()}
+      />
+      <InputLogin
+        label="Password"
+        type="password"
+        name="password"
+        ref={refInput}
+        onChange={ handleChangeInputs }
+        value={ user.password }
+      />
+      <Button handleLogin={ handleLogin } type="button">Login</Button>
+      {/* <label>
+        <button type="button" onClick={ handleLogin }>Login</button>
+      </label> */}
     </div>
   )
 }
